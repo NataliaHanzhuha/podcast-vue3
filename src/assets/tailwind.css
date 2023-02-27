@@ -1,0 +1,54 @@
+@import-normalize;
+@tailwind base;
+@tailwind components;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@layer components {
+  .sidebar-icon {
+    @apply relative flex items-center justify-center 
+    h-12 w-12 mt-2 mb-2 p-1 mx-44 lg:mx-48 
+  bg-gray-100  dark:bg-gray-300 
+    rounded-3xl hover:rounded-xl 
+    transition-all duration-300 ease-linear
+    cursor-pointer shadow-lg ;
+  }
+
+  .sidebar-tooltip {
+    @apply absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md
+    text-white bg-gray-900 
+    text-xs font-bold 
+    transition-all duration-100 scale-0 origin-left;
+  }
+
+  .header-text {
+    @apply text-3xl font-bold tracking-wider
+    text-gray-700 dark:text-gray-300
+    mr-auto ml-2 my-auto flex-1
+    transition duration-300 ease-in-out;
+  }
+
+  .content-container {
+    @apply flex flex-col 
+    bg-gray-50 dark:bg-gray-800
+    text-gray-600 dark:text-gray-300
+    m-0 lg:px-48
+    h-full w-full max-w-full max-h-full
+    overflow-hidden;
+  }
+}
+
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 dark:bg-gray-500 w-2;
+}

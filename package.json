@@ -1,0 +1,34 @@
+{
+  "name": "podcast-therapy",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "dev": "vite",
+    "preview": "vite preview",
+    "start": "npm run tailwind-style & npm run dev",
+    "tailwind-style": "npx tailwindcss -i ./src/styles/app.css -o ./dist/output.css --watch"
+  },
+  "dependencies": {
+    "@coreui/icons": "^3.0.0",
+    "@coreui/icons-vue": "^2.0.0",
+    "firebase": "^9.17.1",
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6",
+    "vuefire": "^3.0.1"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.1.4",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "autoprefixer": "^10.4.13",
+    "eslint": "^8.22.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "postcss": "^8.4.21",
+    "prettier": "^2.7.1",
+    "tailwindcss": "^3.2.7",
+    "vite": "^4.0.0",
+    "vue-cli-plugin-tailwind": "~3.0.0"
+  }
+}
