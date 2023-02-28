@@ -12,24 +12,17 @@
 @layer components {
   .sidebar-icon {
     @apply relative flex items-center justify-center 
-    h-12 w-12 mt-2 mb-2 p-1 mx-44 lg:mx-48 
+    h-12 w-12 mt-2 mb-2 p-1
   bg-gray-100  dark:bg-gray-300 
     rounded-3xl hover:rounded-xl 
-    transition-all duration-300 ease-linear
-    cursor-pointer shadow-lg ;
-  }
-
-  .sidebar-tooltip {
-    @apply absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md
-    text-white bg-gray-900 
-    text-xs font-bold 
-    transition-all duration-100 scale-0 origin-left;
+    transition-all duration-500 ease-linear
+    cursor-pointer;
   }
 
   .header-text {
     @apply text-3xl font-bold tracking-wider
     text-gray-700 dark:text-gray-300
-    mr-auto ml-2 my-auto flex-1
+    ml-2 md:ml-6 my-auto flex-1
     transition duration-300 ease-in-out;
   }
 
@@ -40,6 +33,35 @@
     m-0 lg:px-48
     h-full w-full max-w-full max-h-full
     overflow-hidden;
+  }
+
+  .card {
+    @apply shadow-lg rounded-lg overflow-hidden 
+    bg-white dark:bg-gray-700 p-6 sm:p-4
+     flex flex-col md:flex-row justify-between items-center gap-8 md:gap-4;
+  }
+
+  .card-reverse {
+    @apply flex-col md:flex-row-reverse;
+  }
+
+  .card__img {
+    @apply w-64 h-64 sm:w-40 sm:h-40
+          object-cover object-center rounded-full md:rounded-lg;
+  }
+
+  .card__content {
+    @apply p-4 sm:p-2 
+           flex justify-center flex-col 
+           text-center;
+  }
+
+  .card__content-header {
+    @apply text-3xl font-bold mb-2 dark:text-white text-gray-900;
+  }
+
+  .card__content-description {
+    @apply text-xl leading-tight dark:text-gray-400 text-gray-700;
   }
 }
 

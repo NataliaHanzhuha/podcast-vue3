@@ -1,47 +1,35 @@
 <template>
   <main className="content-container">
     <div class="container mx-auto px-4 py-8">
-      <div class="grid grid-cols-1 gap-4">
-        <div
-          class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-700 p-6 flex flex-row justify-between gap-4 lg:gap-12"
-        >
+      <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
+        <div class="card">
           <img
-            class="w-64 h-64 object-cover object-center rounded-lg"
+            class="card__img"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQBmslRKxwG7YMb30CiTRUKaHxejK5-8c9yg&usqp=CAU"
             alt="photo"
           />
 
-          <div class="px-4 py-4 flex items-end justify-center flex-col">
-            <h2 class="text-3xl font-bold mb-2 dark:text-white text-gray-900">
-              Спартак Суббота
-            </h2>
-            <p class="text-xl leading-tight dark:text-gray-300 text-gray-700">
+          <div class="card__content">
+            <h2 class="card__content-header">Спартак Суббота</h2>
+            <p class="card__content-description">
               Член-кореспондент української академії наук, кандидат
               психологічних наук
             </p>
           </div>
         </div>
 
-
-        <div
-          class="shadow-lg rounded-lg overflow-hidden bg-white dark:bg-gray-700 p-6 flex flex-row justify-between gap-4"
-        >
-          <div class="px-4 py-4 flex justify-center flex-col">
-            <h2 class="text-3xl font-bold mb-2 dark:text-white text-gray-900">
-              Євген Янович
-            </h2>
-            <p class="text-xl leading-tight dark:text-gray-300 text-gray-700">
-              Український актор та комік
-            </p>
-          </div>
+        <div class="card card-reverse">
           <img
-            class="w-64 h-64 object-cover object-center rounded-lg"
+            class="card__img"
             src="data:image/jpeg;base64,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"
             alt="photo"
           />
+          <div class="card__content">
+            <h2 class="card__content-header">Євген Янович</h2>
+            <p class="card__content-description">Український актор та комік</p>
+          </div>
         </div>
       </div>
     </div>
   </main>
 </template>
-

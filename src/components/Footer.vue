@@ -1,8 +1,8 @@
 <template>
-  <footer class="footer-wrapper bg-grey-lighter mt-auto p">
+  <footer class="footer-wrapper bg-grey-lighter mt-auto">
     <div
-      class="footer border-t border-grey-light dark:border-gray-600 py-4 
-      container mx-auto max-w-xl text-grey dark:text-gray-100 
+      class="border-t border-grey-light dark:border-gray-600 py-4
+      container mx-auto max-w-xl text-grey dark:text-gray-400 
       font-light text-sm tracking-wide 
       flex justify-between"
     >
