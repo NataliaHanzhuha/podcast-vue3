@@ -9,26 +9,68 @@
 
       <h1 class="header-text">Podcast Therapy</h1>
 
-      <router-link
-        to="/search"
-        class="text-sm text-gray-700 dark:text-gray-200 self-center"
-        >Search</router-link
-      >
+      <i class="sidebar-icon" @click="() => (openMenu = !openMenu)">
+        <CIcon :icon="cilBurger" size="lg" v-if="!openMenu" />
+      </i>
     </div>
   </header>
+
+  <section
+    v-if="openMenu"
+    class="absolute top-0 left-0 w-full h-full dark:bg-gray-700 mb-4 px-6"
+  >
+    <div class="flex justify-end align-baseline mx-auto md:mx-6">
+      <i
+        v-if="openMenu"
+        class="sidebar-icon"
+        @click="() => (openMenu = !openMenu)"
+      >
+        <CIcon :icon="cilX" size="lg" />
+      </i>
+    </div>
+
+    <div class="flex flex-col items-center justify-between gap-12 my-10">
+      <h3 class="header-text">MENU</h3>
+      <router-link
+        v-for="item in menuItems"
+        :key="item.link"
+        :to="item.link"
+        class="router-link"
+        @click="() => (openMenu = false)"
+        >{{ item.label }}</router-link
+      >
+    </div>
+  </section>
 </template>
 
 <script>
 import { CIcon } from "@coreui/icons-vue";
-import { cilAirplaneMode } from "@coreui/icons";
+import { cilAirplaneMode, cilBurger, cilX } from "@coreui/icons";
 export default {
   name: "App",
   components: {
     CIcon,
   },
+  data() {
+    return {
+      openMenu: false,
+      menuItems: [
+        {
+          label: "Home",
+          link: "/",
+        },
+        {
+          label: "Search",
+          link: "/search",
+        },
+      ],
+    };
+  },
   setup() {
     return {
       cilAirplaneMode,
+      cilBurger,
+      cilX,
     };
   },
 };

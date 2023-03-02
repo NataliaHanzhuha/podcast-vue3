@@ -16,8 +16,10 @@
   <div v-if="!loading">
     <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
       <div class="video-wrapper" v-for="item in videos" :key="item?.title">
+        {{ getSrcSet(item?.thumbnails) }}
         <img
           :src="item?.thumbnails?.high?.url"
+          :srcset="getSrcSet(item?.thumbnails)"
           @click="() => getTimecode(item.timecodes[0])"
         />
         <h3 class="video-title">
@@ -62,6 +64,10 @@ export default {
     };
   },
   methods: {
+    getSrcSet(thumbnails) {
+      console.log(thumbnails, 
+      Object.values(thumbnails).map((item) => `${item.url} w${item.width}`).join(', '))
+    },
     getTimecode(timecode) {
       this.selectedTimecode = timecode.embadedUrl;
     },
