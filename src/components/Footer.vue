@@ -8,9 +8,9 @@
     >
       <span> 2023(C) Unknown. </span>
       <a
-        href="#"
+        href="/"
         class="no-underline text-grey hover:text-grey-dark hover:dark:text-white"
-        >About</a
+        >Домівка</a
       >
     </div>
   </footer>

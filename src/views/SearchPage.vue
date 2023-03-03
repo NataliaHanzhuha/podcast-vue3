@@ -1,26 +1,25 @@
 <template>
-  <div v-if="loading">Loading ...</div>
+  <div v-if="loading">Завантаження ...</div>
 
   <div class="video-wrapper">
+    <p v-if="!loading">Натисни Play для відтворення відео</p>
     <iframe
       width="100%"
-      height="315"
+      height="400"
       :src="getVideoUrl()"
-      :title="item?.title"
       frameborder="0"
       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
       allowfullscreen
     ></iframe>
   </div>
 
-  <div v-if="!loading">
-    <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
+  <div v-if="videos.length || !loading">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <div class="video-wrapper" v-for="item in videos" :key="item?.title">
-        {{ getSrcSet(item?.thumbnails) }}
         <img
           :src="item?.thumbnails?.high?.url"
           :srcset="getSrcSet(item?.thumbnails)"
-          @click="() => getTimecode(item.timecodes[0])"
+          @click="() => getTimecode(item?.timecodes[0])"
         />
         <h3 class="video-title">
           {{ item?.title }}
@@ -31,13 +30,13 @@
             <summary
               class="text-gray-800 dark:text-white mt-4 text-base font-medium tracking-tight"
             >
-              Timecodes
+              Часові віхи
             </summary>
             <ul>
               <li
                 v-for="timecode in item?.timecodes"
                 :key="timecode?.time"
-                class="text-gray-500 dark:text-gray-400 mt-2 text-sm capitalize"
+                class="cursor-pointer text-gray-500 dark:text-gray-400 mt-2 text-sm capitalize"
               >
                 <a @click="() => getTimecode(timecode)">
                   {{ timecode?.time }} - {{ timecode?.description }}
@@ -48,12 +47,25 @@
         </div>
       </div>
     </div>
+    <button @click="() => loadMore()" 
+      class="uppercase text-lg 
+             m-2 lg:m-6 p-4 lg:p-6
+            border-gray-300 border-2 rounded-md 
+             flex-1 w-full"
+    >Завантажити більше</button>
   </div>
 </template>
 
 <script>
 import { db } from "../firebase";
-import { collection, getDocs, orderBy, limit, query } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  orderBy,
+  limit,
+  query,
+  startAfter,
+} from "firebase/firestore";
 export default {
   name: "SearchPage",
   data() {
@@ -61,15 +73,23 @@ export default {
       videos: [],
       selectedTimecode: "",
       loading: true,
+      limit: 4,
+      lastVisible: null,
     };
   },
   methods: {
     getSrcSet(thumbnails) {
-      console.log(thumbnails, 
-      Object.values(thumbnails).map((item) => `${item.url} w${item.width}`).join(', '))
+      return Object.values(thumbnails)
+        .map((item) => `${item.url} w${item.width}`)
+        .join(", ");
     },
     getTimecode(timecode) {
       this.selectedTimecode = timecode.embadedUrl;
+      console.log(this.selectedTimecode)
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     },
     getVideoUrl() {
       return this.selectedTimecode
@@ -78,18 +98,38 @@ export default {
             this.videos[0]?.snippet?.resourceId?.videoId +
             "?autoplay=1;controls=0";
     },
+    async loadMore() {
+      this.loading = true;
+
+      const next = query(
+        collection(db, "videos"),
+        orderBy("snippet.publishedAt", "desc"),
+        startAfter(this.lastVisible),
+        limit(this.limit)
+      );
+
+      const data = await getDocs(next);
+      this.setVideos(data);
+    },
+    setVideos(data) {
+      this.lastVisible = data.docs[data.docs.length - 1];
+
+      data.forEach((doc) => {
+        this.videos.push(doc.data().snippet);
+      });
+
+      this.loading = false;
+    },
   },
   async mounted() {
-    const ref = collection(db, "videos");
-    const q = query(ref, orderBy("snippet.publishedAt", "desc"), limit(4));
-    const data = await getDocs(q);
+    const first = query(
+      collection(db, "videos"),
+      orderBy("snippet.publishedAt", "desc"),
+      limit(this.limit)
+    );
+    const data = await getDocs(first);
 
-    data.forEach((doc) => {
-      this.videos.push(doc.data().snippet);
-    });
-
-    console.log(this.videos);
-    this.loading = false;
+    this.setVideos(data);
   },
 };
 </script>

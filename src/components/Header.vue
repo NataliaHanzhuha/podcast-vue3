@@ -7,7 +7,7 @@
         <CIcon :icon="cilAirplaneMode" size="lg" />
       </router-link>
 
-      <h1 class="header-text">Podcast Therapy</h1>
+      <h1 class="header-text">Подкаст Терапія</h1>
 
       <i class="sidebar-icon" @click="() => (openMenu = !openMenu)">
         <CIcon :icon="cilBurger" size="lg" v-if="!openMenu" />
@@ -29,8 +29,8 @@
       </i>
     </div>
 
-    <div class="flex flex-col items-center justify-between gap-12 my-10">
-      <h3 class="header-text">MENU</h3>
+    <div class="flex flex-col items-center justify-between gap-16 my-10">
+      <h3 class="header-text uppercase">Меню</h3>
       <router-link
         v-for="item in menuItems"
         :key="item.link"
@@ -56,12 +56,16 @@ export default {
       openMenu: false,
       menuItems: [
         {
-          label: "Home",
+          label: "Домівка",
           link: "/",
         },
         {
-          label: "Search",
-          link: "/search",
+          label: "Відео",
+          link: "/videos",
+        },
+        {
+          label: "Книги",
+          link: "/books",
         },
       ],
     };
