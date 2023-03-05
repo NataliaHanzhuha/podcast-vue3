@@ -60,6 +60,10 @@ export default {
           link: "/",
         },
         {
+          label: "Пошук",
+          link: "/search",
+        },
+        {
           label: "Відео",
           link: "/videos",
         },
