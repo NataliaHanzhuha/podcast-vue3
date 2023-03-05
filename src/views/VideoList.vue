@@ -36,7 +36,7 @@
               <li
                 v-for="timecode in item?.timecodes"
                 :key="timecode?.time"
-                class="cursor-pointer text-gray-500 dark:text-gray-400 mt-2 text-sm capitalize"
+                class="cursor-pointer text-gray-500 dark:text-gray-400 mt-2 text-sm capitalize cursor-pointer hover:underline"
               >
                 <a @click="() => getTimecode(timecode)">
                   {{ timecode?.time }} - {{ timecode?.description }}
