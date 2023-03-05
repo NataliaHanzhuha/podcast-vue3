@@ -2,12 +2,10 @@
   <header
     class="h-16 w-full mb-4 px-4 bg-white dark:bg-gray-800 border-b-2 border-white"
   >
-    <div class="flex justify-between align-baseline mx-auto md:mx-6">
-      <router-link to="/" class="sidebar-icon group">
-        <CIcon :icon="cilAirplaneMode" size="lg" />
+    <div class="flex justify-between align-baseline items-center mx-auto md:mx-6">
+      <router-link to="/">
+        <h1 class="header-text">Подкаст Терапія</h1>
       </router-link>
-
-      <h1 class="header-text">Подкаст Терапія</h1>
 
       <i class="sidebar-icon" @click="() => (openMenu = !openMenu)">
         <CIcon :icon="cilBurger" size="lg" v-if="!openMenu" />
@@ -17,7 +15,7 @@
 
   <section
     v-if="openMenu"
-    class="absolute top-0 left-0 w-full h-full dark:bg-gray-700 mb-4 px-6"
+    class="fixed top-0 left-0 w-full h-full dark:bg-gray-700 mb-4 px-6"
   >
     <div class="flex justify-end align-baseline mx-auto md:mx-6">
       <i
