@@ -19,7 +19,7 @@
 
   <div v-if="loading">Завантаження ...</div>
 
-  <div class="video-wrapper">
+  <div class="video-wrapper flex-col">
     <p v-if="!loading">Натисни Play для відтворення відео</p>
     <iframe
       width="100%"
