@@ -7,14 +7,17 @@
 
   <div v-if="loading">Завантаження ...</div>
 
-  <div
+  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-col-4 xl:grid-cols-5 gap-3">
+    <div
     v-for="(book, idx) in books"
     :key="idx"
-    class="text-lg text-gray-700 dark:text-gray-300 p-2 lg:p-4"
+    class="text-lg text-gray-700 dark:text-gray-300 p-2 lg:p-4 flex flex-col gap-2 justify-center text-center max-w-xs border border-r-2"
   >
-    <span class="uppercase">{{ book.author }} - </span>
+    <span class="uppercase">{{ book.author }}</span>
     <a :href="book.url" class="italic cursor-pointer">{{ book.title }}</a>
   </div>
+  </div>
+
 </template>
 
 <script>

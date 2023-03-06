@@ -1,7 +1,7 @@
 <template>
   <div v-if="loading">Завантаження ...</div>
 
-  <div class="video-wrapper">
+  <div class="video-wrapper flex-col">
     <p v-if="!loading">Натисни Play для відтворення відео</p>
     <iframe
       width="100%"
@@ -14,23 +14,24 @@
   </div>
 
   <div v-if="videos.length || !loading">
-    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <div class="grid grid-cols-1 gap-4">
       <div class="video-wrapper" v-for="item in videos" :key="item?.title">
         <img
           :src="item?.thumbnails?.high?.url"
           :srcset="getSrcSet(item?.thumbnails)"
+          class="cursor-pointer"
           @click="() => getTimecode(item?.timecodes[0])"
         />
-        <h3 class="video-title">
-          {{ item?.title }}
-        </h3>
 
-        <div>
+        <div class="video-description">
+          <h3 class="video-title">
+            {{ getTitle(item?.title) }}
+          </h3>
+
           <details>
-            <summary
-              class="text-gray-800 dark:text-white mt-4 text-base font-medium tracking-tight"
-            >
-              Часові віхи
+            <summary>
+              <span>Часові віхи</span>
+              <span class="arrow">&#8594;</span>
             </summary>
             <ul>
               <li
@@ -49,7 +50,7 @@
     </div>
     <button
       @click="() => loadMore()"
-      class="uppercase text-lg m-2 lg:m-6 p-4 lg:p-6 border-gray-300 border-2 rounded-md flex-1 w-full"
+      class="uppercase text-lg my-2 lg:my-6 p-4 lg:p-6 border-gray-300 border-2 rounded-sm flex-1 w-full"
     >
       Завантажити більше
     </button>
@@ -79,6 +80,9 @@ export default {
     };
   },
   methods: {
+    getTitle(title) {
+      return title.slice(0, title.indexOf("|"));
+    },
     getSrcSet(thumbnails) {
       return Object.values(thumbnails)
         .map((item) => `${item.url} w${item.width}`)

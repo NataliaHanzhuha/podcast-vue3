@@ -2,7 +2,9 @@
   <header
     class="h-16 w-full mb-4 px-4 bg-white dark:bg-gray-800 border-b-2 border-white"
   >
-    <div class="flex justify-between align-baseline items-center mx-auto md:mx-6">
+    <div
+      class="flex justify-between align-baseline items-center mx-auto md:mx-6"
+    >
       <router-link to="/">
         <h1 class="header-text">Подкаст Терапія</h1>
       </router-link>
@@ -15,9 +17,9 @@
 
   <section
     v-if="openMenu"
-    class="fixed top-0 left-0 w-full h-full dark:bg-gray-700 mb-4 px-6"
+    class="fixed top-0 left-0 z-10 w-full h-full dark:bg-gray-700 mb-4 px-6"
   >
-    <div class="flex justify-end align-baseline mx-auto md:mx-6">
+    <div class="flex justify-between align-baseline mx-auto md:mx-6">
       <i
         v-if="openMenu"
         class="sidebar-icon"
@@ -28,7 +30,6 @@
     </div>
 
     <div class="flex flex-col items-center justify-between gap-16 my-10">
-      <h3 class="header-text uppercase">Меню</h3>
       <router-link
         v-for="item in menuItems"
         :key="item.link"
@@ -43,7 +44,8 @@
 
 <script>
 import { CIcon } from "@coreui/icons-vue";
-import { cilAirplaneMode, cilBurger, cilX } from "@coreui/icons";
+import { cilBurger, cilX } from "@coreui/icons";
+
 export default {
   name: "App",
   components: {
@@ -74,7 +76,6 @@ export default {
   },
   setup() {
     return {
-      cilAirplaneMode,
       cilBurger,
       cilX,
     };

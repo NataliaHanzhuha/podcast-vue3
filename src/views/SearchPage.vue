@@ -11,7 +11,7 @@
       v-for="timecode in sugestedTimecodes"
       :key="timecode.url"
       @click="() => getTimecode(timecode)"
-      class="text-lg leading-4 hover:uppercase my-2 py-2 cursor-pointer"
+      class="text-lg leading-4 hover:underline my-2 py-2 cursor-pointer"
     >
       {{ timecode.description }}
     </div>

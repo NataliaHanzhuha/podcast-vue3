@@ -1,10 +1,10 @@
 <template>
   <div
-    class="flex flex-col min-h-screen bg-white-200 dark:bg-gray-800 min-h-screen container mx-auto"
+    class="flex flex-col bg-white-200 dark:bg-gray-800 min-h-screen container mx-auto"
   >
     <my-header></my-header>
     <main className="content-container">
-      <div class="container mx-auto px-4 py-8">
+      <div class="container mx-auto px-2 py-8">
         <router-view></router-view>
       </div>
     </main>
