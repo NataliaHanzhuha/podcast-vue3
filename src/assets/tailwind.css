@@ -101,6 +101,10 @@
   .router-link {
     @apply text-6xl text-gray-700 dark:text-gray-200 uppercase tracking-wide leading-8 hover:underline;
   }
+
+  .highlight {
+    @apply bg-gray-600 dark:bg-gray-600 font-semibold
+  }
 }
 
 @tailwind utilities;

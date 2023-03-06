@@ -12,15 +12,22 @@
       :key="timecode.url"
       @click="() => getTimecode(timecode)"
       class="text-lg leading-4 hover:underline my-2 py-2 cursor-pointer"
-    >
-      {{ timecode.description }}
-    </div>
+      v-html="highlightText(timecode.description)"
+    ></div>
   </div>
 
   <div v-if="loading">Завантаження ...</div>
 
   <div class="video-wrapper flex-col">
-    <p v-if="!loading">Натисни Play для відтворення відео</p>
+    <div class="flex justify-between items-center">
+      <h3 v-if="!!selectedTimecode?.description">
+        {{ selectedTimecode.description }}
+      </h3>
+      <p v-if="!loading" class="dark:text-gray-500">
+        Натисни Play для відтворення відео
+      </p>
+    </div>
+
     <iframe
       width="100%"
       height="400"
@@ -50,13 +57,19 @@ export default {
     };
   },
   methods: {
+    highlightText(text) {
+      return text.replace(
+        new RegExp(this.search, "gi"),
+        `<span class="highlight">${this.search}</span>`
+      );
+    },
     getTimecode(timecode) {
-      this.selectedTimecode = timecode.embadedUrl;
-      this.search = '';
+      this.selectedTimecode = timecode;
+      this.search = "";
     },
     getVideoUrl() {
-      return this.selectedTimecode
-        ? this.selectedTimecode + ";autoplay=1"
+      return this.selectedTimecode.embadedUrl
+        ? this.selectedTimecode.embadedUrl + ";autoplay=1"
         : "https://www.youtube.com/embed/" +
             this.videos[0]?.snippet?.resourceId?.videoId +
             "?autoplay=1";
@@ -71,15 +84,13 @@ export default {
       });
 
       this.loading = false;
-      console.log(this.timecodes.length);
     },
   },
   async mounted() {
     await this.getTimecodes();
   },
   watch: {
-    search(newSearch, old) {
-      console.log(newSearch.length, old.length);
+    search(newSearch) {
       if (!newSearch.trim().length) {
         this.sugestedTimecodes = [];
       } else {
